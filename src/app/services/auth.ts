@@ -13,7 +13,7 @@ export class AuthService {
   private http = inject(HttpClient);
   private platformId = inject(PLATFORM_ID); // <-- Para saber dónde estamos
 
-  private readonly apiUrl = 'https://biblioteca-backend-b4yv.onrender.com/api/auth';
+  private readonly apiUrl = 'https://biblioteca-backend-la4y.onrender.com/api/auth';
 
   // 1. Inicializa la señal como null SIEMPRE.
   currentUser = signal<any | null>(null);

@@ -12,7 +12,7 @@ export class UsuarioService {
   private http = inject(HttpClient);
   private platformId = inject(PLATFORM_ID); 
 
-  private readonly apiUrl = 'https://biblioteca-backend-b4yv.onrender.com/api/usuarios';
+  private readonly apiUrl = 'https://biblioteca-backend-la4y.onrender.com/api/usuarios';
 
   // Función helper "BLINDADA"
   private getAuthHeaders(): HttpHeaders | undefined {

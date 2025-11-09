@@ -13,7 +13,7 @@ export class PrestamoService { // Ojo si tu clase se llama 'Prestamo'
   private http = inject(HttpClient);
   private platformId = inject(PLATFORM_ID); // <-- Inyectamos esto
 
-  private readonly apiUrl = 'https://biblioteca-backend-b4yv.onrender.com/api/prestamos';
+  private readonly apiUrl = 'https://biblioteca-backend-la4y.onrender.com/api/prestamos';
 
   // Función helper "BLINDADA"
   private getAuthHeaders(): HttpHeaders | undefined {

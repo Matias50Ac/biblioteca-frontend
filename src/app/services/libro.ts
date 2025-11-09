@@ -13,7 +13,7 @@ export class LibroService {
   private http = inject(HttpClient);
   private platformId = inject(PLATFORM_ID); // <-- Inyectamos esto
 
-  private readonly apiUrl = 'https://biblioteca-backend-b4yv.onrender.com/api/libros';
+  private readonly apiUrl = 'https://biblioteca-backend-la4y.onrender.com/api/libros';
 
   // --- Función PÚBLICA (No necesita token) ---
   getLibros(): Observable<any> {
