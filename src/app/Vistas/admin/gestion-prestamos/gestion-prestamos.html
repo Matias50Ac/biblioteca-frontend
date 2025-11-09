@@ -1,0 +1,72 @@
+<div class="gestion-container">
+  
+  <h2>Realizar Nuevo Préstamo</h2>
+  <form [formGroup]="prestamoForm" (ngSubmit)="onSubmitPrestamo()">
+    
+    <div class="form-group">
+      <label for="usuarioId">Seleccionar Usuario:</label>
+      <select id="usuarioId" formControlName="usuarioId">
+        <option value="" disabled>-- Elige un usuario --</option>
+        <option *ngFor="let user of usuarios()" [value]="user._id">
+          {{ user.nombre }} ({{ user.email }})
+        </option>
+      </select>
+    </div>
+    
+    <div class="form-group">
+      <label for="libroId">Seleccionar Libro (Solo disponibles):</label>
+      <select id="libroId" formControlName="libroId">
+        <option value="" disabled>-- Elige un libro --</option>
+        <option *ngFor="let libro of librosDisponibles()" [value]="libro._id">
+          {{ libro.titulo }} (Autor: {{ libro.autor }})
+        </option>
+      </select>
+    </div>
+    
+    <button type="submit" [disabled]="prestamoForm.invalid">
+      Crear Préstamo
+    </button>
+  </form>
+
+  <hr>
+
+  <h2>Lista de Todos los Préstamos</h2>
+  
+<table>
+    <thead>
+      <tr>
+        <th>Libro (Título)</th>
+        <th>Usuario (Email)</th>
+        <th>Fecha de Préstamo</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let prestamo of prestamos()">
+        <td>{{ prestamo.libro?.titulo || 'Libro no disponible' }}</td>
+        <td>{{ prestamo.usuario?.email || 'Usuario no disponible' }}</td>
+        <td>{{ prestamo.fechaPrestamo | date:'short' }}</td>
+        
+        <td>
+          <span *ngIf="prestamo.fechaDevolucion">
+            Devuelto ({{ prestamo.fechaDevolucion | date:'short' }})
+          </span>
+          <span *ngIf="!prestamo.fechaDevolucion">
+            Activo
+          </span>
+        </td>
+        
+        <td>
+          <button *ngIf="!prestamo.fechaDevolucion" (click)="devolverLibro(prestamo._id)">
+            Marcar como Devuelto
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <a routerLink="/admin">← Volver al Dashboard</a>
+<hr>
+
+</div>

@@ -1,0 +1,62 @@
+/* src/styles.css */
+
+/* 1. Importar la fuente minimalista que pediste (usaremos "Lato") */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+
+/* 2. Sobrescribir las variables de color de Bootstrap */
+:root {
+  /* --- Tu paleta de colores --- */
+  --color-verde-oscuro: #3a5a40;  /* Verde bosque */
+  --color-verde-medio: #588157;   /* Verde principal */
+  --color-verde-claro: #84a98c;   /* Verde suave */
+  --color-beige: #dad7cd;         /* Tu café claro / Beige */
+  --color-fondo: #f8f7f2;         /* Un fondo casi blanco, muy suave */
+  
+  /* --- Aplicar la paleta a Bootstrap --- */
+  --bs-body-font-family: 'Lato', sans-serif; /* ¡Tu fuente minimalista! */
+  --bs-body-bg: var(--color-fondo);
+  --bs-body-color: var(--color-verde-oscuro);
+
+  /* Color de botones, links, etc. */
+  --bs-primary: var(--color-verde-medio);
+  --bs-secondary: var(--color-verde-claro);
+  --bs-danger: #c94c4c; /* Un rojo que combine */
+
+  /* Color de los bordes (inputs, tablas) */
+  --bs-border-color: var(--color-beige);
+  --bs-card-border-color: var(--color-beige);
+
+  /* Colores de la tabla (¡que se vea bien!) */
+  --bs-table-striped-bg: rgba(88, 129, 87, 0.03); /* Verde muy transparente */
+  --bs-table-hover-bg: rgba(88, 129, 87, 0.07);
+}
+
+/* 3. Ajustes menores */
+body {
+  /* Fondo un poco más oscuro que el contenedor principal */
+  background-color: var(--bs-body-bg);
+}
+
+/* Hacemos los botones más suaves */
+.btn {
+  border-radius: 0.25rem;
+}
+
+/* Ajuste para los iconos de bootstrap */
+.btn .bi {
+  vertical-align: -0.125em;
+  pointer-events: none; /* Para que el clic vaya al botón */
+}
+
+/* Color suave para los encabezados de tabla */
+.table-light {
+  --bs-table-bg: #ADEBB3; /* Tu Verde Menta */
+  --bs-table-color: var(--color-verde-oscuro); /* Letra oscura para que se lea bien */
+  border-color: #9acfb0; /* Un borde un poco más oscuro */
+}
+
+/* 3. Color al pasar el mouse (Hover) */
+.table-hover > tbody > tr:hover > * {
+  --bs-table-accent-bg:#EDE8D0; 
+  color: var(--color-verde-oscuro);
+}
