@@ -1,72 +1,83 @@
 <div class="gestion-container">
   
-  <h2>Realizar Nuevo Préstamo</h2>
-  <form [formGroup]="prestamoForm" (ngSubmit)="onSubmitPrestamo()">
-    
-    <div class="form-group">
-      <label for="usuarioId">Seleccionar Usuario:</label>
-      <select id="usuarioId" formControlName="usuarioId">
-        <option value="" disabled>-- Elige un usuario --</option>
-        <option *ngFor="let user of usuarios()" [value]="user._id">
-          {{ user.nombre }} ({{ user.email }})
-        </option>
-      </select>
+  <a routerLink="/admin" class="btn btn-outline-secondary mb-3">
+    <i class="bi bi-arrow-left"></i> Volver al Dashboard
+  </a>
+
+  <div class="card shadow-sm mb-4">
+    <div class="card-body">
+      <h2 class="h5 card-title">Realizar Nuevo Préstamo</h2>
+      
+      <form [formGroup]="prestamoForm" (ngSubmit)="onSubmitPrestamo()">
+        <div class="row g-3">
+          
+          <div class="col-md-6">
+            <label for="usuarioId" class="form-label">Seleccionar Usuario:</label>
+            <select id="usuarioId" formControlName="usuarioId" class="form-select">
+              <option value="" disabled>-- Elige un usuario --</option>
+              <option *ngFor="let user of usuarios()" [value]="user._id">
+                {{ user.nombre }} ({{ user.email }})
+              </option>
+            </select>
+          </div>
+          
+          <div class="col-md-6">
+            <label for="libroId" class="form-label">Seleccionar Libro (Solo disponibles):</label>
+            <select id="libroId" formControlName="libroId" class="form-select">
+              <option value="" disabled>-- Elige un libro --</option>
+              <option *ngFor="let libro of librosDisponibles()" [value]="libro._id">
+                {{ libro.titulo }} (Autor: {{ libro.autor }})
+              </option>
+            </select>
+          </div>
+
+        </div>
+        
+        <div class="mt-3">
+          <button type="submit" [disabled]="prestamoForm.invalid" class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i> Crear Préstamo
+          </button>
+        </div>
+      </form>
     </div>
-    
-    <div class="form-group">
-      <label for="libroId">Seleccionar Libro (Solo disponibles):</label>
-      <select id="libroId" formControlName="libroId">
-        <option value="" disabled>-- Elige un libro --</option>
-        <option *ngFor="let libro of librosDisponibles()" [value]="libro._id">
-          {{ libro.titulo }} (Autor: {{ libro.autor }})
-        </option>
-      </select>
-    </div>
-    
-    <button type="submit" [disabled]="prestamoForm.invalid">
-      Crear Préstamo
-    </button>
-  </form>
+  </div>
 
   <hr>
 
-  <h2>Lista de Todos los Préstamos</h2>
-  
-<table>
-    <thead>
-      <tr>
-        <th>Libro (Título)</th>
-        <th>Usuario (Email)</th>
-        <th>Fecha de Préstamo</th>
-        <th>Estado</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let prestamo of prestamos()">
-        <td>{{ prestamo.libro?.titulo || 'Libro no disponible' }}</td>
-        <td>{{ prestamo.usuario?.email || 'Usuario no disponible' }}</td>
-        <td>{{ prestamo.fechaPrestamo | date:'short' }}</td>
-        
-        <td>
-          <span *ngIf="prestamo.fechaDevolucion">
-            Devuelto ({{ prestamo.fechaDevolucion | date:'short' }})
-          </span>
-          <span *ngIf="!prestamo.fechaDevolucion">
-            Activo
-          </span>
-        </td>
-        
-        <td>
-          <button *ngIf="!prestamo.fechaDevolucion" (click)="devolverLibro(prestamo._id)">
-            Marcar como Devuelto
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
-  <a routerLink="/admin">← Volver al Dashboard</a>
-<hr>
+  <h2 class="h5">Lista de Todos los Préstamos</h2>
+  <div class="table-responsive card shadow-sm">
+    <table class="table table-striped table-hover mb-0">
+      <thead class="table-light"> <tr>
+          <th>Libro (Título)</th>
+          <th>Usuario (Email)</th>
+          <th>Fecha de Préstamo</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let prestamo of prestamos()">
+          <td>{{ prestamo.libro?.titulo || 'Libro no disponible' }}</td>
+          <td>{{ prestamo.usuario?.email || 'Usuario no disponible' }}</td>
+          <td>{{ prestamo.fechaPrestamo | date:'short' }}</td>
+          
+          <td>
+            <span *ngIf="prestamo.fechaDevolucion" class="badge text-bg-secondary">
+              Devuelto ({{ prestamo.fechaDevolucion | date:'short' }})
+            </span>
+            <span *ngIf="!prestamo.fechaDevolucion" class="badge text-bg-primary">
+              Activo
+            </span>
+          </td>
+          
+          <td>
+            <button *ngIf="!prestamo.fechaDevolucion" (click)="devolverLibro(prestamo._id)" class="btn btn-success btn-sm">
+              <i class="bi bi-check-lg"></i> Marcar como Devuelto
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
 </div>
